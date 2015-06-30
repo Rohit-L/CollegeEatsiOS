@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5B27B271B41A86F007E802E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B27B261B41A86F007E802E /* UIColorExtension.swift */; };
 		B5F611C21B3DEFB900ECA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F611C11B3DEFB900ECA0FA /* AppDelegate.swift */; };
-		B5F611C41B3DEFB900ECA0FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F611C31B3DEFB900ECA0FA /* ViewController.swift */; };
+		B5F611C41B3DEFB900ECA0FA /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F611C31B3DEFB900ECA0FA /* NavigationVC.swift */; };
 		B5F611C71B3DEFB900ECA0FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F611C51B3DEFB900ECA0FA /* Main.storyboard */; };
 		B5F611C91B3DEFB900ECA0FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F611C81B3DEFB900ECA0FA /* Images.xcassets */; };
 		B5F611CC1B3DEFB900ECA0FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F611CA1B3DEFB900ECA0FA /* LaunchScreen.xib */; };
 		B5F611D81B3DEFB900ECA0FA /* CollegeEatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F611D71B3DEFB900ECA0FA /* CollegeEatsTests.swift */; };
 		B5F611E21B3DF3A000ECA0FA /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F611E11B3DF3A000ECA0FA /* json.swift */; };
+		B5FAF2E31B411BB0001AE66C /* MenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF2E21B411BB0001AE66C /* MenuTableVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,10 +29,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B5B27B261B41A86F007E802E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		B5F611BC1B3DEFB900ECA0FA /* CollegeEats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollegeEats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F611C01B3DEFB900ECA0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5F611C11B3DEFB900ECA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5F611C31B3DEFB900ECA0FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5F611C31B3DEFB900ECA0FA /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
 		B5F611C61B3DEFB900ECA0FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5F611C81B3DEFB900ECA0FA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B5F611CB1B3DEFB900ECA0FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 		B5F611D61B3DEFB900ECA0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5F611D71B3DEFB900ECA0FA /* CollegeEatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeEatsTests.swift; sourceTree = "<group>"; };
 		B5F611E11B3DF3A000ECA0FA /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
+		B5FAF2E21B411BB0001AE66C /* MenuTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +83,15 @@
 		B5F611BE1B3DEFB900ECA0FA /* CollegeEats */ = {
 			isa = PBXGroup;
 			children = (
+				B5B27B261B41A86F007E802E /* UIColorExtension.swift */,
 				B5F611C11B3DEFB900ECA0FA /* AppDelegate.swift */,
 				B5F611E11B3DF3A000ECA0FA /* json.swift */,
-				B5F611C31B3DEFB900ECA0FA /* ViewController.swift */,
+				B5F611C31B3DEFB900ECA0FA /* NavigationVC.swift */,
 				B5F611C51B3DEFB900ECA0FA /* Main.storyboard */,
 				B5F611C81B3DEFB900ECA0FA /* Images.xcassets */,
 				B5F611CA1B3DEFB900ECA0FA /* LaunchScreen.xib */,
 				B5F611BF1B3DEFB900ECA0FA /* Supporting Files */,
+				B5FAF2E21B411BB0001AE66C /* MenuTableVC.swift */,
 			);
 			path = CollegeEats;
 			sourceTree = "<group>";
@@ -215,7 +221,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F611C41B3DEFB900ECA0FA /* ViewController.swift in Sources */,
+				B5FAF2E31B411BB0001AE66C /* MenuTableVC.swift in Sources */,
+				B5F611C41B3DEFB900ECA0FA /* NavigationVC.swift in Sources */,
+				B5B27B271B41A86F007E802E /* UIColorExtension.swift in Sources */,
 				B5F611C21B3DEFB900ECA0FA /* AppDelegate.swift in Sources */,
 				B5F611E21B3DF3A000ECA0FA /* json.swift in Sources */,
 			);
@@ -415,6 +423,7 @@
 				B5F611DD1B3DEFB900ECA0FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B5F611DE1B3DEFB900ECA0FA /* Build configuration list for PBXNativeTarget "CollegeEatsTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +432,7 @@
 				B5F611E01B3DEFB900ECA0FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
