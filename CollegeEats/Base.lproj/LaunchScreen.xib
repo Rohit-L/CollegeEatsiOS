@@ -13,7 +13,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hln-YD-raD">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="60"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEW-S7-7Bi">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's Good Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEW-S7-7Bi">
                             <rect key="frame" x="0.0" y="30" width="480" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="dC2-q4-Mvk"/>
@@ -40,7 +40,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="DAO-5c-Uih"/>
                             </constraints>
-                            <state key="normal" image="test">
+                            <state key="normal" image="star">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -51,7 +51,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="0oy-mx-opu"/>
                             </constraints>
-                            <state key="normal" image="test">
+                            <state key="normal" image="gear">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -107,6 +107,8 @@
         </view>
     </objects>
     <resources>
+        <image name="gear" width="50" height="50"/>
+        <image name="star" width="50" height="50"/>
         <image name="test" width="50" height="50"/>
     </resources>
 </document>

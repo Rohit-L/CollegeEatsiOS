@@ -9,19 +9,30 @@
 import UIKit
 
 class NavigationVC: UIViewController {
-        
-    @IBOutlet weak var button1: UIButton!
-    @IBOutlet weak var button2: UIButton!
-    @IBOutlet weak var button3: UIButton!
-    @IBOutlet weak var menuContainer: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var mainContent: UIView!
+    
+    // Buttons
+    @IBOutlet weak var favoritesButton: SpringButton!
+    @IBOutlet weak var menuButton: SpringButton!
+    @IBOutlet weak var settingsButton: SpringButton!
+    
+    @IBOutlet weak var titleLabel: UILabel! // The Main Header Label
+    @IBOutlet weak var mainContent: SpringView! // The Container View
     var mainContentController: UITabBarController!
+    var systemColor = "green"
+    var colors: NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        button1.backgroundColor = UIColor(rgba: "#BB97D2")
+        // Load plist Data
+        let path = NSBundle.mainBundle().pathForResource("colors", ofType: "plist")
+        print("path")
+        print(path)
+        colors = NSDictionary(contentsOfFile: path!)!
+        print(colors)
+        
+        // Set initial button background color
+        favoritesButton.backgroundColor = UIColor(rgba: "#BB97D2")
         
         
         /* TESTING preferences import */
@@ -47,42 +58,84 @@ class NavigationVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func buttonTapped(sender: UIButton) {
-        if sender == button1 {
-            button1.backgroundColor = UIColor(rgba: "#BB97D2")
-            button2.backgroundColor = UIColor.clearColor()
-            button3.backgroundColor = UIColor.clearColor()
-        } else if sender == button2 {
-            button1.backgroundColor = UIColor.clearColor()
-            button2.backgroundColor = UIColor(rgba: "#BB97D2")
-            button3.backgroundColor = UIColor.clearColor()
+    @IBAction func tabButtonTapped(sender: SpringButton) {
+        sender.animation = "zoomIn"
+        sender.curve = "linear"
+        sender.duration = 1.0
+        sender.damping = 1.0
+        sender.animate()
+        
+        print(systemColor)
+        print(colors)
+        print(colors[systemColor])
+        let mainColor = colors[systemColor]![1] as! String
+        
+        if sender == favoritesButton {
+            favoritesButton.backgroundColor = UIColor(rgba: mainColor)
+            menuButton.backgroundColor = UIColor.clearColor()
+            settingsButton.backgroundColor = UIColor.clearColor()
+        } else if sender == menuButton {
+            favoritesButton.backgroundColor = UIColor.clearColor()
+            menuButton.backgroundColor = UIColor(rgba: mainColor)
+            settingsButton.backgroundColor = UIColor.clearColor()
         } else {
-            button1.backgroundColor = UIColor.clearColor()
-            button2.backgroundColor = UIColor.clearColor()
-            button3.backgroundColor = UIColor(rgba: "#BB97D2")
+            favoritesButton.backgroundColor = UIColor.clearColor()
+            menuButton.backgroundColor = UIColor.clearColor()
+            settingsButton.backgroundColor = UIColor(rgba: mainColor)
         }
     }
     
-    @IBAction func menuTapped(sender: UIButton) {
+    private func animateMainContent(#left: Bool) {
+        if left {
+            mainContent.animation = "slideLeft"
+        } else {
+            mainContent.animation = "slideRight"
+        }
+        mainContent.curve = "linear"
+        mainContent.duration = 0.5
+        mainContent.damping = 1.0
+        mainContent.animate()
+    }
+    
+    @IBAction func favoritesTapped(sender: SpringButton) {
+        
+        if self.mainContentController.selectedIndex == 0 {
+            return
+        }
+        
         titleLabel.text = "What's Good Today?"
+        if self.mainContentController.selectedIndex > 0 {
+            animateMainContent(left: false)
+        }
         mainContentController.selectedIndex = 0
+        
     }
     
-    @IBAction func FavoritesTapped(sender: UIButton) {
+    @IBAction func menuTapped(sender: SpringButton) {
+        
+        if self.mainContentController.selectedIndex == 1 {
+            return
+        }
+        
         titleLabel.text = "Menu"
-        
-        // Get views. controllerIndex is passed in as the controller we want to go to.
-        var fromView = mainContentController.selectedViewController!.view
-        var toView = mainContentController.viewControllers?[1].view!
-        
-        UIView.transitionFromView(fromView, toView: toView!, duration: 0.1, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: { finished in
-            self.mainContentController.selectedIndex = 1
-        })
+        if self.mainContentController.selectedIndex < 1 {
+            animateMainContent(left: true)
+        } else {
+            animateMainContent(left: false)
+        }
+        self.mainContentController.selectedIndex = 1
     }
     
-    
-    @IBAction func settingsTapped(sender: UIButton) {
+    @IBAction func settingsTapped(sender: SpringButton) {
+        
+        if self.mainContentController.selectedIndex == 2 {
+            return
+        }
+        
         titleLabel.text = "Settings"
+        if self.mainContentController.selectedIndex < 2 {
+            animateMainContent(left: true)
+        }
         mainContentController.selectedIndex = 2
     }
     

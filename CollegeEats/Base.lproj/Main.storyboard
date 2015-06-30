@@ -20,8 +20,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WM-Db-NOe">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="What's Good Today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMK-eT-aEN">
-                                        <rect key="frame" x="0.0" y="30" width="600" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's Good Today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMK-eT-aEN">
+                                        <rect key="frame" x="0.0" y="30" width="600" height="20"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -38,7 +38,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u0L-U8-03z">
                                 <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dk7-Uy-6Ra">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dk7-Uy-6Ra" customClass="SpringButton" customModule="CollegeEats" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="52"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -51,27 +51,11 @@
                                         <state key="selected" image="test"/>
                                         <state key="highlighted" image="star"/>
                                         <connections>
-                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="vv5-Dx-CKM"/>
-                                            <action selector="menuTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eLG-Kn-Gta"/>
+                                            <action selector="favoritesTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QwS-gg-xbh"/>
+                                            <action selector="tabButtonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="FPp-II-HrO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjx-cw-ziF">
-                                        <rect key="frame" x="400" y="0.0" width="200" height="52"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="AxW-qW-8ll"/>
-                                        </constraints>
-                                        <state key="normal" image="gear">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="test"/>
-                                        <state key="highlighted" image="gear"/>
-                                        <connections>
-                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="cQ0-3O-3db"/>
-                                            <action selector="settingsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6sL-rl-VnW"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGc-Af-Ghz">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGc-Af-Ghz" customClass="SpringButton" customModule="CollegeEats" customModuleProvider="target">
                                         <rect key="frame" x="200" y="0.0" width="200" height="52"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -84,8 +68,24 @@
                                         <state key="selected" image="test"/>
                                         <state key="highlighted" image="test"/>
                                         <connections>
-                                            <action selector="FavoritesTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kxQ-SA-Xh4"/>
-                                            <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="wMA-z5-QnX"/>
+                                            <action selector="menuTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L7a-3C-W8I"/>
+                                            <action selector="tabButtonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="EBg-xa-RJb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjx-cw-ziF" customClass="SpringButton" customModule="CollegeEats" customModuleProvider="target">
+                                        <rect key="frame" x="400" y="0.0" width="200" height="52"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="AxW-qW-8ll"/>
+                                        </constraints>
+                                        <state key="normal" image="gear">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" image="test"/>
+                                        <state key="highlighted" image="gear"/>
+                                        <connections>
+                                            <action selector="settingsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6sL-rl-VnW"/>
+                                            <action selector="tabButtonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="61f-J8-Ro8"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -120,7 +120,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhY-JQ-yk7">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhY-JQ-yk7" customClass="SpringView" customModule="CollegeEats" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="60" width="600" height="490"/>
                                 <connections>
                                     <segue destination="53c-09-Wxm" kind="embed" identifier="mainContent" id="RSG-Ki-a8w"/>
@@ -142,11 +142,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="button1" destination="Dk7-Uy-6Ra" id="ajp-A1-iTP"/>
-                        <outlet property="button2" destination="HGc-Af-Ghz" id="h1J-tl-Uff"/>
-                        <outlet property="button3" destination="bjx-cw-ziF" id="0fM-KR-f0I"/>
+                        <outlet property="favoritesButton" destination="Dk7-Uy-6Ra" id="9jr-9S-xHe"/>
                         <outlet property="mainContent" destination="bhY-JQ-yk7" id="O1R-te-k09"/>
-                        <outlet property="menuContainer" destination="bhY-JQ-yk7" id="Rg0-Ae-25Y"/>
+                        <outlet property="menuButton" destination="HGc-Af-Ghz" id="QDh-E7-Zjw"/>
+                        <outlet property="settingsButton" destination="bjx-cw-ziF" id="sxf-ov-99r"/>
                         <outlet property="titleLabel" destination="OMK-eT-aEN" id="3v8-SS-MxA"/>
                     </connections>
                 </viewController>
@@ -193,8 +192,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="490"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="What's good today?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SML-0j-edS">
-                                <rect key="frame" x="222" y="289" width="156" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's good today?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SML-0j-edS">
+                                <rect key="frame" x="222.5" y="235" width="155.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
