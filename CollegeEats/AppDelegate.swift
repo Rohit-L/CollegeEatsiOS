@@ -12,10 +12,39 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    // Load plist Data
+    var systemColor = "purple"
+    var colors: NSDictionary!
+    var buttonColor: String!
+    var mainColor: String!
+    
+    // App data
+    var menu: JSON!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Load plist Data
+        let path = NSBundle.mainBundle().pathForResource("colors", ofType: "plist")
+        colors = NSDictionary(contentsOfFile: path!)!
+        buttonColor = colors[systemColor]![1] as! String
+        mainColor = colors[systemColor]![0] as! String
+        
+        /* HTTP Request */
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://www.quinterest.org/laucity/collegeEats/scripts/getMenu.php")!)
+        request.HTTPMethod = "POST"
+        var response: NSURLResponse?
+        var error: NSErrorPointer = nil
+        var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: error)
+        if data == nil {
+            self.menu = nil
+        } else {
+            var reply = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
+            print(reply)
+            self.menu = JSON(string: reply)
+        }
+        
         return true
     }
 

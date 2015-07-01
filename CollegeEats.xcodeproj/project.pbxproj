@@ -185,11 +185,11 @@
 				B5F611C11B3DEFB900ECA0FA /* AppDelegate.swift */,
 				B5F611E11B3DF3A000ECA0FA /* json.swift */,
 				B5F611C31B3DEFB900ECA0FA /* NavigationVC.swift */,
+				B5FAF2E21B411BB0001AE66C /* MenuTableVC.swift */,
 				B5F611C51B3DEFB900ECA0FA /* Main.storyboard */,
 				B5F611C81B3DEFB900ECA0FA /* Images.xcassets */,
 				B5F611CA1B3DEFB900ECA0FA /* LaunchScreen.xib */,
 				B5F611BF1B3DEFB900ECA0FA /* Supporting Files */,
-				B5FAF2E21B411BB0001AE66C /* MenuTableVC.swift */,
 				B5BC33E51B427190000E3F32 /* colors.plist */,
 			);
 			path = CollegeEats;
@@ -270,6 +270,7 @@
 				TargetAttributes = {
 					B5F611BB1B3DEFB900ECA0FA = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 5FW8TQJ4DK;
 					};
 					B5F611D01B3DEFB900ECA0FA = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -484,9 +485,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CollegeEats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -494,16 +498,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CollegeEats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
 		B5F611DF1B3DEFB900ECA0FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -522,7 +528,6 @@
 		B5F611E01B3DEFB900ECA0FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

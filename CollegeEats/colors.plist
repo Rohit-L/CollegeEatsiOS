@@ -12,5 +12,10 @@
 		<string>#68A833</string>
 		<string>#95C720</string>
 	</array>
+    <key>blue</key>
+    <array>
+        <string>#39A9D3</string>
+        <string>#6BBFDE</string>
+    </array>
 </dict>
 </plist>
