@@ -181,12 +181,10 @@
 		B5F611BE1B3DEFB900ECA0FA /* CollegeEats */ = {
 			isa = PBXGroup;
 			children = (
-				B5B27B261B41A86F007E802E /* UIColorExtension.swift */,
+				B5F611C51B3DEFB900ECA0FA /* Main.storyboard */,
 				B5F611C11B3DEFB900ECA0FA /* AppDelegate.swift */,
-				B5F611E11B3DF3A000ECA0FA /* json.swift */,
 				B5F611C31B3DEFB900ECA0FA /* NavigationVC.swift */,
 				B5FAF2E21B411BB0001AE66C /* MenuTableVC.swift */,
-				B5F611C51B3DEFB900ECA0FA /* Main.storyboard */,
 				B5F611C81B3DEFB900ECA0FA /* Images.xcassets */,
 				B5F611CA1B3DEFB900ECA0FA /* LaunchScreen.xib */,
 				B5F611BF1B3DEFB900ECA0FA /* Supporting Files */,
@@ -198,6 +196,8 @@
 		B5F611BF1B3DEFB900ECA0FA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B5B27B261B41A86F007E802E /* UIColorExtension.swift */,
+				B5F611E11B3DF3A000ECA0FA /* json.swift */,
 				B5F611C01B3DEFB900ECA0FA /* Info.plist */,
 				B5BC33A91B42679C000E3F32 /* Spring */,
 			);

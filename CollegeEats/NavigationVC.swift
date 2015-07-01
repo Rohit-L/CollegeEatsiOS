@@ -120,7 +120,7 @@ class NavigationVC: UIViewController {
         // Does nothing if already correct
         if self.mainContentController.selectedIndex == 2 { return }
         
-        titleLabel.text = settingsString
+        titleLabel.text = ""
         animateMainContent(left: true)
         mainContentController.selectedIndex = 2
     }

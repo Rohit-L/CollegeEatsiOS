@@ -18,7 +18,8 @@ class MenuTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Get menu from app delegate
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         menu = appDelegate.menu
         
@@ -35,7 +36,8 @@ class MenuTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // MARK: Table View Functions
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menu["Length"][time[mealSelection.selectedSegmentIndex]!].asInt!
+        print(menu == nil)
+        return menu == nil ? 1 : menu["Length"][time[mealSelection.selectedSegmentIndex]!].asInt!
     }
     
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -46,7 +48,7 @@ class MenuTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Get a valid result cell
         var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         
-        cell.textLabel!.text = menu[time[mealSelection.selectedSegmentIndex]!][indexPath.row][2].asString!
+        cell.textLabel!.text = menu == nil ? "Unable to load menu. Check connection." : menu[time[mealSelection.selectedSegmentIndex]!][indexPath.row][2].asString!
         return cell
         
     }
