@@ -22,10 +22,15 @@ class MenuTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Get menu from app delegate
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         menu = appDelegate.menu
-        
+                
         // Set segmented control color
         mealSelection.tintColor = UIColor(rgba: appDelegate.mainColor)
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        mealSelection.tintColor = UIColor(rgba: appDelegate.mainColor)
     }
 
     override func didReceiveMemoryWarning() {

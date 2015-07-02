@@ -21,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // App data
     var menu: JSON!
+    
+    // Various view controller
+    var navigationVC: NavigationVC?
+    var settingsTableVC: SettingsTableVC?
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B504B6461B44993B005D8E8E /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504B6451B44993B005D8E8E /* SettingsTableVC.swift */; };
+		B560491B1B44DA4C00EE18D8 /* ChooseThemeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B560491A1B44DA4C00EE18D8 /* ChooseThemeVC.swift */; };
 		B5B27B271B41A86F007E802E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B27B261B41A86F007E802E /* UIColorExtension.swift */; };
 		B5BC33C81B42679C000E3F32 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC33AA1B42679C000E3F32 /* AsyncButton.swift */; };
 		B5BC33C91B42679C000E3F32 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC33AB1B42679C000E3F32 /* AsyncImageView.swift */; };
@@ -59,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B504B6451B44993B005D8E8E /* SettingsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
+		B560491A1B44DA4C00EE18D8 /* ChooseThemeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseThemeVC.swift; sourceTree = "<group>"; };
 		B5B27B261B41A86F007E802E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		B5BC33AA1B42679C000E3F32 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		B5BC33AB1B42679C000E3F32 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 				B5F611C11B3DEFB900ECA0FA /* AppDelegate.swift */,
 				B5F611C31B3DEFB900ECA0FA /* NavigationVC.swift */,
 				B5FAF2E21B411BB0001AE66C /* MenuTableVC.swift */,
+				B504B6451B44993B005D8E8E /* SettingsTableVC.swift */,
+				B560491A1B44DA4C00EE18D8 /* ChooseThemeVC.swift */,
 				B5F611C81B3DEFB900ECA0FA /* Images.xcassets */,
 				B5F611CA1B3DEFB900ECA0FA /* LaunchScreen.xib */,
 				B5F611BF1B3DEFB900ECA0FA /* Supporting Files */,
@@ -326,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5FAF2E31B411BB0001AE66C /* MenuTableVC.swift in Sources */,
+				B560491B1B44DA4C00EE18D8 /* ChooseThemeVC.swift in Sources */,
 				B5BC33D91B42679C000E3F32 /* SoundPlayer.swift in Sources */,
 				B5BC33CD1B42679C000E3F32 /* DesignableImageView.swift in Sources */,
 				B5BC33DF1B42679C000E3F32 /* SpringTextField.swift in Sources */,
@@ -341,6 +348,7 @@
 				B5BC33D21B42679C000E3F32 /* DesignableView.swift in Sources */,
 				B5BC33E31B42679C000E3F32 /* TransitionZoom.swift in Sources */,
 				B5BC33CB1B42679C000E3F32 /* BlurView.swift in Sources */,
+				B504B6461B44993B005D8E8E /* SettingsTableVC.swift in Sources */,
 				B5F611E21B3DF3A000ECA0FA /* json.swift in Sources */,
 				B5BC33D31B42679C000E3F32 /* ImageLoader.swift in Sources */,
 				B5BC33E11B42679C000E3F32 /* SpringView.swift in Sources */,

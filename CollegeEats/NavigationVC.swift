@@ -21,6 +21,7 @@ class NavigationVC: UIViewController {
     @IBOutlet weak var titleLabelView: UIView!
     @IBOutlet weak var tabBarView: UIView!
     @IBOutlet weak var mainContent: SpringView! // The Container View
+    @IBOutlet weak var backButton: UIButton!
     
     // Strings
     var favoritesString = "What's Good Today?"
@@ -38,6 +39,8 @@ class NavigationVC: UIViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         buttonColor = appDelegate.buttonColor
         mainColor = appDelegate.mainColor
+        
+        appDelegate.navigationVC = self
 
         // Set initial view colors
         titleLabelView.backgroundColor = UIColor(rgba: mainColor)
@@ -120,9 +123,16 @@ class NavigationVC: UIViewController {
         // Does nothing if already correct
         if self.mainContentController.selectedIndex == 2 { return }
         
-        titleLabel.text = ""
+        titleLabel.text = settingsString
         animateMainContent(left: true)
         mainContentController.selectedIndex = 2
     }
 
+    @IBAction func backButtonTapped(sender: UIButton) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.settingsTableVC?.navigationController?.popViewControllerAnimated(true)
+        backButton.hidden = true
+        titleLabel.text = settingsString
+    }
+    
 }
