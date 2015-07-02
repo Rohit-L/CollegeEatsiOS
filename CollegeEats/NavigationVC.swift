@@ -31,21 +31,12 @@ class NavigationVC: UIViewController {
     var mainColor: String!
 
     var mainContentController: UITabBarController!
+    var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Get application colors from app delegate
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        buttonColor = appDelegate.buttonColor
-        mainColor = appDelegate.mainColor
-        
         appDelegate.navigationVC = self
-
-        // Set initial view colors
-        titleLabelView.backgroundColor = UIColor(rgba: mainColor)
-        tabBarView.backgroundColor = UIColor(rgba: mainColor)
-        buttonHighlight.backgroundColor = UIColor(rgba: buttonColor)
         
         
 //        /* TESTING preferences import */
@@ -59,11 +50,13 @@ class NavigationVC: UIViewController {
 //        var inputreply = NSString(data: datapref!, encoding: NSUTF8StringEncoding)! as String
         
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    override func viewDidAppear(animated: Bool) {
+        titleLabelView.backgroundColor = UIColor(rgba: appDelegate.mainColor)
+        tabBarView.backgroundColor = UIColor(rgba: appDelegate.mainColor)
+        buttonHighlight.backgroundColor = UIColor(rgba: appDelegate.buttonColor)
+    }
+
     // Set the status bar color
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
@@ -129,7 +122,6 @@ class NavigationVC: UIViewController {
     }
 
     @IBAction func backButtonTapped(sender: UIButton) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.settingsTableVC?.navigationController?.popViewControllerAnimated(true)
         backButton.hidden = true
         titleLabel.text = settingsString

@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     // Load plist Data
-    var systemColor = "green"
+    var systemColor = "purple"
     var colors: NSDictionary!
     var buttonColor: String!
     var mainColor: String!
