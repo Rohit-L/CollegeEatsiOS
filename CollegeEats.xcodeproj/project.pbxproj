@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B504B6461B44993B005D8E8E /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504B6451B44993B005D8E8E /* SettingsTableVC.swift */; };
+		B51F7A0E1B4510D900A0D30F /* ChoosePreferencesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F7A0D1B4510D900A0D30F /* ChoosePreferencesVC.swift */; };
+		B51F7A101B45AD1700A0D30F /* FavoritesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F7A0F1B45AD1700A0D30F /* FavoritesTableVC.swift */; };
+		B533D4FF1B4714BC00A80D6C /* IJReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533D4FE1B4714BC00A80D6C /* IJReachability.swift */; };
 		B560491B1B44DA4C00EE18D8 /* ChooseThemeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B560491A1B44DA4C00EE18D8 /* ChooseThemeVC.swift */; };
 		B5B27B271B41A86F007E802E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B27B261B41A86F007E802E /* UIColorExtension.swift */; };
 		B5BC33C81B42679C000E3F32 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BC33AA1B42679C000E3F32 /* AsyncButton.swift */; };
@@ -62,6 +65,9 @@
 
 /* Begin PBXFileReference section */
 		B504B6451B44993B005D8E8E /* SettingsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
+		B51F7A0D1B4510D900A0D30F /* ChoosePreferencesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoosePreferencesVC.swift; sourceTree = "<group>"; };
+		B51F7A0F1B45AD1700A0D30F /* FavoritesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableVC.swift; sourceTree = "<group>"; };
+		B533D4FE1B4714BC00A80D6C /* IJReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IJReachability.swift; sourceTree = "<group>"; };
 		B560491A1B44DA4C00EE18D8 /* ChooseThemeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseThemeVC.swift; sourceTree = "<group>"; };
 		B5B27B261B41A86F007E802E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		B5BC33AA1B42679C000E3F32 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
@@ -189,8 +195,10 @@
 				B5F611C11B3DEFB900ECA0FA /* AppDelegate.swift */,
 				B5F611C31B3DEFB900ECA0FA /* NavigationVC.swift */,
 				B5FAF2E21B411BB0001AE66C /* MenuTableVC.swift */,
+				B51F7A0F1B45AD1700A0D30F /* FavoritesTableVC.swift */,
 				B504B6451B44993B005D8E8E /* SettingsTableVC.swift */,
 				B560491A1B44DA4C00EE18D8 /* ChooseThemeVC.swift */,
+				B51F7A0D1B4510D900A0D30F /* ChoosePreferencesVC.swift */,
 				B5F611C81B3DEFB900ECA0FA /* Images.xcassets */,
 				B5F611CA1B3DEFB900ECA0FA /* LaunchScreen.xib */,
 				B5F611BF1B3DEFB900ECA0FA /* Supporting Files */,
@@ -202,6 +210,7 @@
 		B5F611BF1B3DEFB900ECA0FA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B533D4FE1B4714BC00A80D6C /* IJReachability.swift */,
 				B5B27B261B41A86F007E802E /* UIColorExtension.swift */,
 				B5F611E11B3DF3A000ECA0FA /* json.swift */,
 				B5F611C01B3DEFB900ECA0FA /* Info.plist */,
@@ -332,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5FAF2E31B411BB0001AE66C /* MenuTableVC.swift in Sources */,
+				B51F7A101B45AD1700A0D30F /* FavoritesTableVC.swift in Sources */,
 				B560491B1B44DA4C00EE18D8 /* ChooseThemeVC.swift in Sources */,
 				B5BC33D91B42679C000E3F32 /* SoundPlayer.swift in Sources */,
 				B5BC33CD1B42679C000E3F32 /* DesignableImageView.swift in Sources */,
@@ -353,6 +363,8 @@
 				B5BC33D31B42679C000E3F32 /* ImageLoader.swift in Sources */,
 				B5BC33E11B42679C000E3F32 /* SpringView.swift in Sources */,
 				B5BC33DE1B42679C000E3F32 /* SpringLabel.swift in Sources */,
+				B51F7A0E1B4510D900A0D30F /* ChoosePreferencesVC.swift in Sources */,
+				B533D4FF1B4714BC00A80D6C /* IJReachability.swift in Sources */,
 				B5BC33D81B42679C000E3F32 /* Misc.swift in Sources */,
 				B5BC33CF1B42679C000E3F32 /* DesignableTabBarController.swift in Sources */,
 				B5BC33CA1B42679C000E3F32 /* AutoTextView.swift in Sources */,

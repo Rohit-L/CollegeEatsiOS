@@ -24,13 +24,14 @@ class NavigationVC: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     
     // Strings
-    var favoritesString = "What's Good Today?"
+    var favoritesString = "Your Favorite Foods"
     var menuString = "Today's Menu"
     var settingsString = "Settings"
     var buttonColor: String!
     var mainColor: String!
 
     var mainContentController: UITabBarController!
+    var tabs = [0: favoritesTapped, 1: menuTapped, 2: settingsTapped]
     var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
     override func viewDidLoad() {
@@ -38,16 +39,12 @@ class NavigationVC: UIViewController {
         
         appDelegate.navigationVC = self
         
-        
-//        /* TESTING preferences import */
-//        let requestpref = NSMutableURLRequest(URL: NSURL(string: "http://www.quinterest.org/laucity/collegeEats/scripts/inputpref.php")!)
-//        requestpref.HTTPMethod = "POST"
-//        let postDatapref = "userid=a&prefs=dick, pizza, almonds"
-//        requestpref.HTTPBody = postDatapref.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-//        var responsepref: NSURLResponse?
-//        var errorpref: NSErrorPointer = nil
-//        var datapref = NSURLConnection.sendSynchronousRequest(requestpref, returningResponse: &responsepref, error: errorpref)
-//        var inputreply = NSString(data: datapref!, encoding: NSUTF8StringEncoding)! as String
+        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        leftSwipe.direction = .Left
+        rightSwipe.direction = .Right
+        self.view.addGestureRecognizer(leftSwipe)
+        self.view.addGestureRecognizer(rightSwipe)
         
     }
     
@@ -55,6 +52,11 @@ class NavigationVC: UIViewController {
         titleLabelView.backgroundColor = UIColor(rgba: appDelegate.mainColor)
         tabBarView.backgroundColor = UIColor(rgba: appDelegate.mainColor)
         buttonHighlight.backgroundColor = UIColor(rgba: appDelegate.buttonColor)
+        
+        if !appDelegate.isConnected {
+            let alert = UIAlertController(title: "Not Connected the Internet", message: "Please connect to a network to use CollegeEats", preferredStyle: UIAlertControllerStyle.Alert)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
 
     // Set the status bar color
@@ -73,7 +75,13 @@ class NavigationVC: UIViewController {
     // Animates the button highlight
     @IBAction func tabButtonTapped(sender: SpringButton) {
         UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            if sender == self.favoritesButton {
+                self.appDelegate.getFavoritesAsynchronous()
+            }
             self.buttonHighlight.frame.origin.x = sender.frame.origin.x
+            self.appDelegate.settingsTableVC?.navigationController?.popToRootViewControllerAnimated(true)
+            self.backButton.hidden = true
+            
         }, completion: nil)
     }
     
@@ -125,6 +133,36 @@ class NavigationVC: UIViewController {
         appDelegate.settingsTableVC?.navigationController?.popViewControllerAnimated(true)
         backButton.hidden = true
         titleLabel.text = settingsString
+        appDelegate.getFavoritesAsynchronous()
+        
+    }
+    
+    func handleSwipes(sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .Left) {
+            println("Swipe Left")
+            if mainContentController.selectedIndex != 2 {
+                if mainContentController.selectedIndex == 0 {
+                    menuTapped(menuButton)
+                    tabButtonTapped(menuButton)
+                } else {
+                    settingsTapped(settingsButton)
+                    tabButtonTapped(settingsButton)
+                }
+            }
+        }
+        
+        if (sender.direction == .Right) {
+            println("Swipe Right")
+            if mainContentController.selectedIndex != 0 {
+                if mainContentController.selectedIndex == 2 {
+                    menuTapped(menuButton)
+                    tabButtonTapped(menuButton)
+                } else {
+                    favoritesTapped(favoritesButton)
+                    tabButtonTapped(favoritesButton)
+                }
+            }
+        }
     }
     
 }

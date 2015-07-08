@@ -20,14 +20,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WM-Db-NOe">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's Good Today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMK-eT-aEN">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Favorite Foods" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMK-eT-aEN">
                                         <rect key="frame" x="0.0" y="30" width="600" height="20"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYe-q0-bCC">
-                                        <rect key="frame" x="8" y="28" width="62" height="22"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYe-q0-bCC">
+                                        <rect key="frame" x="8" y="29" width="62" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="62" id="VWS-TP-Lbp"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title=" Back" image="backArrow">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -218,7 +221,7 @@
         <!--Favorites-->
         <scene sceneID="vDL-Fm-9NJ">
             <objects>
-                <viewController title="Favorites" id="zbE-Pm-V2p" sceneMemberID="viewController">
+                <viewController title="Favorites" id="zbE-Pm-V2p" customClass="FavoritesTableVC" customModule="CollegeEats" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eKE-oc-K6e"/>
                         <viewControllerLayoutGuide type="bottom" id="d4v-wW-9g4"/>
@@ -228,31 +231,61 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0sU-5I-TxJ">
-                                <rect key="frame" x="64" y="16" width="472" height="29"/>
+                                <rect key="frame" x="36" y="20" width="528" height="29"/>
                                 <segments>
                                     <segment title="Breakfast"/>
                                     <segment title="Lunch"/>
                                     <segment title="Dinner"/>
                                 </segments>
-                                <color key="tintColor" red="0.40784313725490196" green="0.6588235294117647" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="mealSelectionChanged:" destination="zbE-Pm-V2p" eventType="valueChanged" id="1HT-5T-zUB"/>
+                                </connections>
                             </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CcY-qS-wjA">
+                                <rect key="frame" x="0.0" y="60" width="600" height="381"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="tQT-kX-poU">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tQT-kX-poU" id="aDf-bW-FYB">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="zbE-Pm-V2p" id="vE2-0N-jkk"/>
+                                    <outlet property="delegate" destination="zbE-Pm-V2p" id="PCL-h1-SvF"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="0sU-5I-TxJ" firstAttribute="leading" secondItem="CqO-qZ-VHC" secondAttribute="leading" constant="36" id="1m1-8Z-1nZ"/>
+                            <constraint firstItem="d4v-wW-9g4" firstAttribute="top" secondItem="CcY-qS-wjA" secondAttribute="bottom" id="51i-Rb-4jk"/>
                             <constraint firstAttribute="centerY" secondItem="0sU-5I-TxJ" secondAttribute="centerY" id="LZG-KS-Ddw"/>
+                            <constraint firstItem="CcY-qS-wjA" firstAttribute="top" secondItem="0sU-5I-TxJ" secondAttribute="bottom" constant="12" id="LtP-p6-x9y"/>
                             <constraint firstAttribute="centerX" secondItem="0sU-5I-TxJ" secondAttribute="centerX" id="NVP-RD-Ghj"/>
-                            <constraint firstItem="0sU-5I-TxJ" firstAttribute="leading" secondItem="CqO-qZ-VHC" secondAttribute="leadingMargin" constant="48" id="XOX-7s-z9F"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0sU-5I-TxJ" secondAttribute="trailing" constant="48" id="hKc-fF-HCa"/>
-                            <constraint firstItem="0sU-5I-TxJ" firstAttribute="top" secondItem="eKE-oc-K6e" secondAttribute="bottom" constant="16" id="uXj-I6-KDf"/>
+                            <constraint firstItem="0sU-5I-TxJ" firstAttribute="leading" secondItem="CqO-qZ-VHC" secondAttribute="leadingMargin" constant="36" id="XOX-7s-z9F"/>
+                            <constraint firstAttribute="trailing" secondItem="0sU-5I-TxJ" secondAttribute="trailing" constant="36" id="aa1-Cu-os0"/>
+                            <constraint firstAttribute="trailing" secondItem="CcY-qS-wjA" secondAttribute="trailing" id="eRo-d9-efi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0sU-5I-TxJ" secondAttribute="trailing" constant="36" id="hKc-fF-HCa"/>
+                            <constraint firstItem="CcY-qS-wjA" firstAttribute="leading" secondItem="CqO-qZ-VHC" secondAttribute="leading" id="qVD-tz-bme"/>
+                            <constraint firstItem="0sU-5I-TxJ" firstAttribute="top" secondItem="eKE-oc-K6e" secondAttribute="bottom" constant="20" id="uXj-I6-KDf"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="LZG-KS-Ddw"/>
                                 <exclude reference="NVP-RD-Ghj"/>
+                                <exclude reference="XOX-7s-z9F"/>
+                                <exclude reference="hKc-fF-HCa"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="7lf-1a-FDU"/>
+                    <connections>
+                        <outlet property="favoritesTableView" destination="CcY-qS-wjA" id="St6-7B-JnM"/>
+                        <outlet property="mealSelection" destination="0sU-5I-TxJ" id="bwB-yf-s1R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SUe-Ur-9Hk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,14 +310,13 @@
                                     <segment title="Lunch"/>
                                     <segment title="Dinner"/>
                                 </segments>
-                                <color key="tintColor" red="0.99607843139999996" green="0.76470588240000004" blue="0.027450980390000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="mealSelectionChanged:" destination="QTz-mh-UKo" eventType="valueChanged" id="bOB-Hy-toJ"/>
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zKo-EQ-MbY">
                                 <rect key="frame" x="0.0" y="60" width="600" height="430"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="XVT-4m-Fkr">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -381,7 +413,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="ohb-F4-EtJ" kind="show" id="Mz7-7A-Dks"/>
+                                    <segue destination="ohb-F4-EtJ" kind="show" identifier="themeChooser" id="Mz7-7A-Dks"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="preferences" textLabel="2iL-uT-VIQ" style="IBUITableViewCellStyleDefault" id="b4s-Lm-UYO">
@@ -397,6 +429,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Y0I-Mg-0vN" kind="show" identifier="preferencesChooser" id="Any-Md-pzb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -410,10 +445,10 @@
             </objects>
             <point key="canvasLocation" x="703" y="2506"/>
         </scene>
-        <!--Choose ThemeVC-->
+        <!--Theme-->
         <scene sceneID="Fdy-mS-DVM">
             <objects>
-                <tableViewController id="ohb-F4-EtJ" customClass="ChooseThemeVC" customModule="CollegeEats" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Theme" id="ohb-F4-EtJ" customClass="ChooseThemeVC" customModule="CollegeEats" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="oeH-ms-d5P">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="490"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -445,7 +480,41 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jeC-FD-ePR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="703" y="3185"/>
+            <point key="canvasLocation" x="1429" y="2506"/>
+        </scene>
+        <!--Menu Preferences-->
+        <scene sceneID="VkS-OT-WY8">
+            <objects>
+                <tableViewController title="Menu Preferences" id="Y0I-Mg-0vN" customClass="ChoosePreferencesVC" customModule="CollegeEats" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ekf-SV-uFp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="490"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" textLabel="pbM-qg-1mN" style="IBUITableViewCellStyleDefault" id="AVz-ef-FbC">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AVz-ef-FbC" id="8Mk-hl-TTu">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pbM-qg-1mN">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Y0I-Mg-0vN" id="L6Q-mg-LJv"/>
+                            <outlet property="delegate" destination="Y0I-Mg-0vN" id="fe9-8s-4WB"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRz-xx-F7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="703" y="3219"/>
         </scene>
         <!--Settings-->
         <scene sceneID="0CE-8Y-onF">

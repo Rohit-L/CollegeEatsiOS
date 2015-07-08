@@ -7,46 +7,51 @@
 //
 
 import UIKit
+import SystemConfiguration
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    // Load plist Data
-    var systemColor = "purple"
-    var colors: NSDictionary!
+    // Colors
+    var colors: NSMutableDictionary!
+    var systemColor: String!
     var buttonColor: String!
     var mainColor: String!
     
-    // App data
-    var menu: JSON!
+    // Data
+    var dailyMenu: JSON!
+    var favoritesMenu: JSON!
+    var allFood: JSON!
+    var favorites: [String]! = []
+    var isConnected: Bool = false
     
-    // Various view controller
+    // View controllers
     var navigationVC: NavigationVC?
     var settingsTableVC: SettingsTableVC?
-    
+    var favoritesTableVC: FavoritesTableVC?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         
-        // Load plist Data and set colors
-        let path = NSBundle.mainBundle().pathForResource("colors", ofType: "plist")
-        colors = NSDictionary(contentsOfFile: path!)!
-        buttonColor = colors[systemColor]![1] as! String
-        mainColor = colors[systemColor]![0] as! String
+        // Check for network connection
+        isConnected = IJReachability.isConnectedToNetwork()
         
-        /* Asynchronous HTTP Request to Get Menu */
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://www.quinterest.org/laucity/collegeEats/scripts/getMenu.php")!)
-        request.HTTPMethod = "POST"
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
-            if data == nil {
-                self.menu = nil
-            } else {
-                var reply = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
-                print(reply)
-                self.menu = JSON(string: reply)
-            }
+        loadLocalColors()
+
+        
+        if isConnected {
+            
+            getFavoritesSynchronous()
+            loadLocalFavorites()
+            getMenuSynchronous()
+            getAllFoodAsynchronous()
+            
+        } else { // Not connected
+            
+            self.favoritesMenu = nil
+            self.dailyMenu = nil
+            self.allFood = nil
         }
         
         return true
@@ -58,8 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        // Save color preferences
+        saveFile(fileName: "colors.plist", fileObject: colors)
+        
+        // Save Favorites
+        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.UserDomainMask, true)
+        let documentsDirectory = paths[0] as! NSString
+        let save = documentsDirectory.stringByAppendingPathComponent("favorites.plist")
+        (favorites as NSArray).writeToFile(save, atomically: true)
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -71,9 +82,149 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        // Save color preferences
+        saveFile(fileName: "colors.plist", fileObject: colors)
+        
+        // Save Favorites
+        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.UserDomainMask, true)
+        let documentsDirectory = paths[0] as! NSString
+        let save = documentsDirectory.stringByAppendingPathComponent("favorites.plist")
+        (favorites as NSArray).writeToFile(save, atomically: true)
+    }
+    
+    func saveFile(#fileName: String, fileObject: NSDictionary) {
+        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.UserDomainMask, true)
+        let documentsDirectory = paths[0] as! NSString
+        let saveFile = documentsDirectory.stringByAppendingPathComponent(fileName as String)
+        fileObject.writeToFile(saveFile, atomically: true)
+    }
+    
+    func getData(#file: String, postData: String) -> String? {
+        var request = NSMutableURLRequest(URL: NSURL(string: "http://www.quinterest.org/laucity/collegeEats/scripts/" + file)!)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = postData.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+        
+        /* Synchronous (Halting) HTTP Request */
+        var response: NSURLResponse?
+        var error: NSErrorPointer = nil
+        var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: error)
+        var reply = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
+        return reply == "" ? nil : reply
+    }
+    
+    func loadLocalColors() -> Void {
+        
+        // Get local documents directory
+        let documentsDirectory = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! NSString
+        
+        // Load local colors file
+        let colorsFile = documentsDirectory.stringByAppendingPathComponent("colors.plist")
+        
+        if (NSFileManager.defaultManager().fileExistsAtPath(colorsFile)) {
+            colors = NSMutableDictionary(contentsOfFile: colorsFile)
+        } else {
+            // First time app is opened
+            let path = NSBundle.mainBundle().pathForResource("colors", ofType: "plist")
+            colors = NSMutableDictionary(contentsOfFile: path!)!
+        }
+        
+        // Set app colors
+        self.systemColor = colors["userSelection"]! as! String
+        self.mainColor = colors[systemColor]![0] as! String
+        self.buttonColor = colors[systemColor]![1] as! String
+    }
+    
+    // Load local favorites plist into array
+    func loadLocalFavorites() -> Void {
+        
+        // Get local documents directory
+        let documentsDirectory = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! NSString
+        
+        let favoritesFile = documentsDirectory.stringByAppendingPathComponent("favorites.plist")
+        
+        if (NSFileManager.defaultManager().fileExistsAtPath(favoritesFile)) { // if file exist
+            self.favorites = NSArray(contentsOfFile: favoritesFile) as! [String]
+        } else {
+            self.favorites = []
+        }
+    }
+    
+    // Asynchronous HTTP Request to get favorites
+    func getFavoritesAsynchronous() -> Void {
+        var request = NSMutableURLRequest(URL: NSURL(string: "http://www.quinterest.org/laucity/collegeEats/scripts/getFavorites.php")!)
+        request.HTTPMethod = "POST"
+        let requestData = "id=" + UIDevice.currentDevice().identifierForVendor.UUIDString
+        request.HTTPBody = requestData.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
+            if data == nil {
+                self.favoritesMenu = nil
+            } else {
+                let reply = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
+                if reply == "" {
+                    self.favoritesMenu = nil
+                } else {
+                    print(reply)
+                    self.favoritesMenu = JSON(string: reply)
+                }
+            }
+            self.favoritesTableVC?.favoritesTableView.reloadData()
+        }
+    }
+    
+    // Synchronous HTTP Request to Get Favorites
+    func getFavoritesSynchronous() -> Void {
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://www.quinterest.org/laucity/collegeEats/scripts/getFavorites.php")!)
+        request.HTTPMethod = "POST"
+        let requestData = "id=" + UIDevice.currentDevice().identifierForVendor.UUIDString
+        request.HTTPBody = requestData.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+        var response: NSURLResponse?
+        var error: NSErrorPointer = nil
+        var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: error)
+        if data == nil {
+            self.favoritesMenu = nil
+        } else {
+            let reply = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
+            if reply == "" {
+                self.favoritesMenu = nil
+            } else {
+                print(reply)
+                self.favoritesMenu = JSON(string: reply)
+            }
+        }
+        self.favoritesTableVC?.favoritesTableView.reloadData()
+    }
+    
+    // Synchronous HTTP Request to Get Menu
+    func getMenuSynchronous() -> Void {
+        self.dailyMenu = JSON(string: getData(file: "getMenu.php", postData: "")!)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://www.quinterest.org/laucity/collegeEats/scripts/getMenu.php")!)
+        request.HTTPMethod = "POST"
+        var response: NSURLResponse?
+        var error: NSErrorPointer = nil
+        var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: error)
+        var reply = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
+        if data == nil {
+            self.dailyMenu = nil
+        } else {
+            let reply = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
+            self.dailyMenu = JSON(string: reply)
+        }
+    }
+    
+    // Asynchronous HTTP Request to get all food items
+    func getAllFoodAsynchronous() -> Void {
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://www.laucity.com/collegeEats/scripts/getFood.php")!)
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {(response, data, error) in
+            if data == nil {
+                self.allFood = nil
+            } else {
+                var reply = NSString(data: data!, encoding: NSUTF8StringEncoding)! as String
+                self.allFood = JSON(string: reply)
+            }
+        }
     }
 
-
+    
 }
-

@@ -30,14 +30,13 @@ class SettingsTableVC: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        print(indexPath.row)
         var identifier = indexPath.row == 0 ? "theme" : "preferences"
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! UITableViewCell
         
         if indexPath.row == 0 {
             cell.textLabel!.text = "Choose Theme"
         } else {
-            cell.textLabel!.text = "Change Menu Preferences"
+            cell.textLabel!.text = "Choose Favorites"
         }
 
         return cell
@@ -46,6 +45,6 @@ class SettingsTableVC: UITableViewController {
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         appDelegate.navigationVC!.backButton.hidden = false
-        appDelegate.navigationVC!.titleLabel.text = "Choose Theme"
+        appDelegate.navigationVC!.titleLabel.text = segue.identifier == "themeChooser" ? "Choose Theme" : "Choose Favorites"
     }
 }

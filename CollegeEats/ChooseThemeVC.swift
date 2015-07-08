@@ -10,15 +10,12 @@ import UIKit
 
 class ChooseThemeVC: UITableViewController {
     
-    var colors: NSDictionary!
     var checkColor = [0: "purple", 1: "green", 2: "blue"]
     var lastSelectedIndexPath: NSIndexPath?
     var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        colors = appDelegate.colors
     }
 
     // MARK: - Table view data source
@@ -27,14 +24,14 @@ class ChooseThemeVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return colors.count
+        return appDelegate.colors.count - 1
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Get the reusable cell
         let cell = tableView.dequeueReusableCellWithIdentifier("colorCell", forIndexPath: indexPath) as! UITableViewCell
-        var cellColor = colors[checkColor[indexPath.row]!]![0] as! String
+        var cellColor = appDelegate.colors[checkColor[indexPath.row]!]![0] as! String
 
         // Set the text and color of the cell
         cell.textLabel?.text = checkColor[indexPath.row]?.capitalizedString
@@ -67,8 +64,9 @@ class ChooseThemeVC: UITableViewController {
         
         // Get the new colors
         let selectedColor = checkColor[indexPath.row]!
-        let mainColor = colors[selectedColor]![0] as! String
-        let buttonColor = colors[selectedColor]![1] as! String
+        let mainColor = appDelegate.colors[selectedColor]![0] as! String
+        let buttonColor = appDelegate.colors[selectedColor]![1] as! String
+        appDelegate.colors["userSelection"] = selectedColor
         
         // Set the new appDelegate colors
         appDelegate.systemColor = selectedColor
